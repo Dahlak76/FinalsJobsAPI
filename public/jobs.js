@@ -34,7 +34,7 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
     }
 } catch (err) {
 
-    message.textContent = 'A communication error occurred.'
+    message.textContent = 'A1 communication error occurred.'
     return 0
 }
   }
@@ -374,3 +374,21 @@ else if (e.target.classList.contains('editButton')) {
 })
 
 })
+//app.use(helmet());
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "script-src": ["'self'", "'unsafe-inline'", "example.com"],
+//       },
+//     },
+//   })
+// );
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: false,
+//   })
+// );
+
+//    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>

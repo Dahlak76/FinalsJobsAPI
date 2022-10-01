@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('express-async-errors');
 
-//extra security packages
+
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
@@ -34,10 +34,25 @@ app.use(rateLimiter({
   max: 100, // limit each IP to 100 requests per windowMs
 }));
 app.use(express.json());
-app.use(helmet());
+//app.use(helmet());
 app.use(cors());
 app.use(xss());
-
+//extra security packages
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "script-src": ["'self'", "'unsafe-inline'", "example.com"],
+//       },
+//     },
+//   })
+// );
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 
 // extra packages

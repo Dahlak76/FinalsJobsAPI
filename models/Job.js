@@ -14,8 +14,8 @@ const JobSchema = new mongoose.Schema({
   //add phone interview, received response, emailed, job offered, missing documentation, take-home challenge
   status:{
     type:String,
-    enum:['interview', 'declined', 'pending'],
-    default: 'pending',
+    enum:['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
+    default: 'applied',
   },
   //assigns to the specific user
   createdBy:{
