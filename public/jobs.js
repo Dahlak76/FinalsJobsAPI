@@ -1,4 +1,28 @@
+let dataStatus = [];
+let statusCount = 0;
+console.log(dataStatus, 'dataStatus......')
+let applied = 0;
+let emailed = 0;
+let offered = 0;
+let interview = 0;
+let takeHome = 0;
+let appointment = 0;
+let declined = 0;
+let pending = 0;
 
+    
+let labelObj = {
+     applied: 0,
+     emailed: 0,
+     offered: 0,
+     interview: 0,
+     takeHome: 0,
+     appointment: 0,
+     declined: 0,
+     pending: 0,
+};
+//['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
+console.log(labelObj.interview, 'labelObj.interview....')
 async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
   // section A
   try {
@@ -10,7 +34,40 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
         }
     })
     data = await response.json()
-    
+    // let dataStatus = [];
+    // let statusCount = 0;
+    //console.log(data, 'testing data.......')
+    for (let i = 0; i < data.jobs.length; i++) {
+        dataStatus.push(data.jobs[i].status);
+        statusCount += 1;
+        if (data.jobs[i].status === 'interview') {
+            interview += 1
+            labelObj.interview = labelObj.interview + 1;
+        }
+        if (data.jobs[i].status === 'declined') {
+            declined += 1
+        }
+        if (data.jobs[i].status === 'pending') {
+            pending += 1
+        }
+        if (data.jobs[i].status === 'emailed') {
+            emailed += 1
+        }
+        if (data.jobs[i].status === 'job offered') {
+            offered += 1
+        }
+        if (data.jobs[i].status === 'take-home test') {
+            takeHome += 1
+        }
+        if (data.jobs[i].status === 'appointment set') {
+            appointment += 1
+        }
+        if (data.jobs[i].status === 'applied') {
+            applied += 1
+        }
+        console.log(applied, interview, declined, pending, appointment, takeHome, offered, emailed, statusCount)
+    }
+    console.log(dataStatus, 'dataStatus.....')
     var children = [jobsTableHeader]
     if (response.status === 200) {
         if (data.count === 0) {
@@ -37,7 +94,9 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
     message.textContent = 'A1 communication error occurred.'
     return 0
 }
+
   }
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const logoff = document.getElementById('logoff')
@@ -87,6 +146,42 @@ document.addEventListener('startDisplay', async (e) =>{
         }
         jobs.style.display = "block"
         showing = jobs
+        let dataArr = [interview, declined, pending, emailed, offered, takeHome, appointment, applied];
+ 
+        console.log(dataArr, 'dataArr....')
+       //['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
+         let myChart = document.getElementById('myChart').getContext('2d');
+         let newChart = new Chart(myChart, {
+             type: 'bar',
+             data: {
+                 labels: ['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
+                 datasets: [{
+                  label: 'Current Job Status', 
+                  data: dataArr,
+                  //data: [1, 2, 3, 4, 2, 4, 6, 1],
+                  //data: dataStatus,
+                  //data: interview, declined, pending, emailed, offered, takeHome, appointment, applied,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+                 }]
+             },
+             options: {},
+         })
     } else {
         logonRegister.style.display = "block"
     }

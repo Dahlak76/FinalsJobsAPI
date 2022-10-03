@@ -28,3 +28,54 @@
      },
      options: {},
  })
+//  for (let i = 0; i < data.jobs.length; i++) {
+//     dataStatus.push(data.jobs[i].status);
+//     statusCount += 1;
+//     if (data.jobs[i].status === 'interview') {
+//         labelObj.interview = labelObj.interview + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'declined') {
+//         labelObj.declined = labelObj.declined + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'pending') {
+//         labelObj.pending = labelObj.pending + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'emailed') {
+//         labelObj.emailed = labelObj.emailed + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'job offered') {
+//         labelObj.offered = labelObj.offered + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'take-home test') {
+//         labelObj.takeHome = labelObj.takeHome + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'appointment set') {
+//         labelObj.appointment = labelObj.appointment + 1 || 1
+//     }
+//     if (data.jobs[i].status === 'applied') {
+//         labelObj.applied = labelObj.applied + 1 || 1
+//     }
+   
+//     console.log(applied, interview, declined, pending, appointment, takeHome, offered, emailed, statusCount)
+
+// let labelObj = {
+//     applied : 0,
+//     emailed : 0,
+//     offered : 0,
+//     interview : 0,
+//     takeHome : 0,
+//     appointment : 0,
+//     declined : 0,
+//     pending : 0,
+// };
+
+// const labelHeader = async function getChart() {
+//     const response = await fetch('/api/v1/jobs')
+//     const newData = await response.text();
+//     //const table = data.split('\n').slice(1);
+//     // table.forEach(row => {
+        
+//     // }) 
+//     console.log(response)  
+//   }
+//   labelHeader()
