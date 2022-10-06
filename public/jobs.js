@@ -65,6 +65,8 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
         if (data.jobs[i].status === 'applied') {
             applied += 1
         }
+        //thisEvent = new Event('myChart')
+        //document.dispatchEvent(thisEvent)
         console.log(applied, interview, declined, pending, appointment, takeHome, offered, emailed, statusCount)
     }
     console.log(dataStatus, 'dataStatus.....')
@@ -158,6 +160,48 @@ document.addEventListener('startDisplay', async (e) =>{
                  datasets: [{
                   label: 'Current Job Status', 
                   data: dataArr,
+                  //data: [1, 2, 3, 4, 2, 4, 6, 1],
+                  //data: dataStatus,
+                  //data: interview, declined, pending, emailed, offered, takeHome, appointment, applied,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+                 }]
+             },
+             options: {},
+         })
+         let myTotal = document.getElementById('myTotal').getContext('2d');
+         const companiesCount = data.jobs.reduce((acc, curr) => {
+            if (acc[curr.company] === undefined) {
+              acc[curr.company] = 1;
+            } else {
+              acc[curr.company] = acc[curr.company] + 1;
+            }
+            return acc;
+          }, {});
+          
+         let newTotal = new Chart(myTotal, {
+             type: 'bar',
+             data: {
+                 //labels: Array.from(new Set(data.jobs.map(j => j.company))),
+                 labels: Object.keys(companiesCount),
+                 datasets: [{
+                  label: 'Current Job Status', 
+                  data: Object.values(companiesCount),
                   //data: [1, 2, 3, 4, 2, 4, 6, 1],
                   //data: dataStatus,
                   //data: interview, declined, pending, emailed, offered, takeHome, appointment, applied,
@@ -327,7 +371,8 @@ document.addEventListener('click', async (e) => {
                 message.textContent = 'The job entry was created.'
                 showing.style.display='none'
                 thisEvent = new Event('startDisplay')
-                document.dispatchEvent(thisEvent)
+                //document.dispatchEvent(thisEvent)
+                location.reload()
                 company.value = ''
                 position.value = ''
                 status.value = 'pending'
