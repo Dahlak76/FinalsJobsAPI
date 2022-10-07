@@ -156,7 +156,7 @@ document.addEventListener('startDisplay', async (e) =>{
          let newChart = new Chart(myChart, {
              type: 'bar',
              data: {
-                 labels: ['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
+                 labels: ['interview', 'declined', 'pending', 'emailed', 'take-home test', 'appointment set', 'applied'],
                  datasets: [{
                   label: 'Current Job Status', 
                   data: dataArr,
@@ -200,7 +200,7 @@ document.addEventListener('startDisplay', async (e) =>{
                  //labels: Array.from(new Set(data.jobs.map(j => j.company))),
                  labels: Object.keys(companiesCount),
                  datasets: [{
-                  label: 'Current Job Status', 
+                  label: 'Total Positions Applied For', 
                   data: Object.values(companiesCount),
                   //data: [1, 2, 3, 4, 2, 4, 6, 1],
                   //data: dataStatus,
