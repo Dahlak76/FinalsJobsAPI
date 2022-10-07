@@ -93,7 +93,7 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
     }
 } catch (err) {
 
-    message.textContent = 'A1 communication error occurred.'
+    message.textContent = 'A communication error occurred.'
     return 0
 }
 
@@ -148,9 +148,10 @@ document.addEventListener('startDisplay', async (e) =>{
         }
         jobs.style.display = "block"
         showing = jobs
-        let dataArr = [interview, declined, pending, emailed, offered, takeHome, appointment, applied];
+        let dataArr = [interview, declined, pending, emailed, takeHome, appointment, applied];
  
         console.log(dataArr, 'dataArr....')
+    
        //['interview', 'declined', 'pending', 'emailed', 'job offered', 'take-home test', 'appointment set', 'applied'],
          let myChart = document.getElementById('myChart').getContext('2d');
          let newChart = new Chart(myChart, {
@@ -182,7 +183,18 @@ document.addEventListener('startDisplay', async (e) =>{
                 borderWidth: 1
                  }]
              },
-             options: {},
+             options: {
+                plugins:  { 
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 34
+                            }
+                        }
+                    }
+                }
+            },
          })
          let myTotal = document.getElementById('myTotal').getContext('2d');
          const companiesCount = data.jobs.reduce((acc, curr) => {
@@ -200,11 +212,12 @@ document.addEventListener('startDisplay', async (e) =>{
                  //labels: Array.from(new Set(data.jobs.map(j => j.company))),
                  labels: Object.keys(companiesCount),
                  datasets: [{
-                  label: 'Total Positions Applied For', 
+                  label: 'Total positions applied for at each company', 
                   data: Object.values(companiesCount),
                   //data: [1, 2, 3, 4, 2, 4, 6, 1],
                   //data: dataStatus,
                   //data: interview, declined, pending, emailed, offered, takeHome, appointment, applied,
+                  
                   backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -221,10 +234,22 @@ document.addEventListener('startDisplay', async (e) =>{
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderWidth: 1
+                borderWidth: 2,
+                hoverOffset: 10,
                  }]
              },
-             options: {},
+             options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 34
+                            }
+                        }
+                    }
+                }
+            },
          })
     } else {
         logonRegister.style.display = "block"
