@@ -2,13 +2,13 @@ let dataStatus = [];
 let statusCount = 0;
 console.log(dataStatus, 'dataStatus......')
 let applied = 0;
+let pending = 0;
+let interview = 0;
 let emailed = 0;
 let offered = 0;
-let interview = 0;
 let takeHome = 0;
 let appointment = 0;
 let declined = 0;
-let pending = 0;
 
     
 let labelObj = {
@@ -42,7 +42,6 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
         statusCount += 1;
         if (data.jobs[i].status === 'interview') {
             interview += 1
-            labelObj.interview = labelObj.interview + 1;
         }
         if (data.jobs[i].status === 'declined') {
             declined += 1
@@ -53,13 +52,13 @@ async function buildJobsTable(jobsTable, jobsTableHeader, token, message) {
         if (data.jobs[i].status === 'emailed') {
             emailed += 1
         }
-        if (data.jobs[i].status === 'job offered') {
+        if (data.jobs[i].status === 'offered') {
             offered += 1
         }
-        if (data.jobs[i].status === 'take-home test') {
+        if (data.jobs[i].status === 'takeHome') {
             takeHome += 1
         }
-        if (data.jobs[i].status === 'appointment set') {
+        if (data.jobs[i].status === 'appointment') {
             appointment += 1
         }
         if (data.jobs[i].status === 'applied') {
@@ -195,7 +194,7 @@ document.addEventListener('startDisplay', async (e) =>{
                     }
                 }
             },
-         })
+         })//add conditional for subtracting a job from edit/delete
          let myTotal = document.getElementById('myTotal').getContext('2d');
          const companiesCount = data.jobs.reduce((acc, curr) => {
             if (acc[curr.company] === undefined) {
